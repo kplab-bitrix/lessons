@@ -1,11 +1,253 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <h1>
-      Привет!
-    </h1>
-  </body>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KPLab · Mini‑курс PHP для начинающих</title>
+  <style>
+    :root{
+      --bg:#ffffff; --text:#1f2328; --muted:#6e7781; --accent:#0b77ff; --border:#d0d7de; --chip:#f6f8fa;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0d1117; --text:#c9d1d9; --muted:#8b949e; --accent:#4493f8; --border:#30363d; --chip:#161b22; }
+    }
+    *{ box-sizing: border-box }
+    body{
+      margin:0; background:var(--bg); color:var(--text); font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+    .wrap{ display:grid; grid-template-columns:280px 1fr; min-height:100vh }
+    nav{
+      border-right:1px solid var(--border); padding:24px 20px; position:sticky; top:0; height:100dvh; overflow:auto;
+    }
+    nav h1{ font-size:18px; margin:0 0 16px 0 }
+    .brand{ display:flex; gap:8px; align-items:center; font-weight:700 }
+    .brand .logo{
+      width:28px; height:28px; border-radius:6px; background:linear-gradient(135deg,#b3e5ff, #6ec1ff 60%, #328ef1);
+      box-shadow:0 1px 0 rgba(0,0,0,.15) inset, 0 0 0 1px rgba(255,255,255,.2) inset;
+    }
+    .navsec{ margin:18px 0 }
+    .navsec h3{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:0 0 8px }
+    .toc{ list-style:none; margin:0; padding:0 }
+    .toc li{ margin:2px 0 }
+    .toc a{ display:block; padding:8px 10px; border-radius:8px }
+    .toc a.active, .toc a:hover{ background:var(--chip) }
+    header{
+      padding:24px 28px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+    }
+    .badges{ display:flex; gap:8px; flex-wrap:wrap }
+    .chip{ font-size:12px; color:var(--muted); background:var(--chip); border:1px solid var(--border); padding:6px 10px; border-radius:999px }
+    main{ padding:32px 28px 80px; max-width:920px }
+    section{ scroll-margin-top:80px; }
+    h2{ margin-top:32px; font-size:24px }
+    h3{ margin-top:18px; font-size:18px }
+    pre, code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","DejaVu Sans Mono", "Courier New", monospace }
+    pre{ background:var(--chip); border:1px solid var(--border); padding:14px; border-radius:10px; overflow:auto }
+    .cta{ margin-top:6px }
+    .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px }
+    @media (max-width:1024px){ .wrap{ grid-template-columns:1fr } nav{ position:static; height:auto; border-right:none; border-bottom:1px solid var(--border) } }
+    .hr{ height:1px; background:var(--border); margin:24px 0 }
+    .note{ padding:12px 14px; border:1px dashed var(--border); border-radius:10px; background:transparent }
+    .list{ padding-left:18px }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <h1 class="brand"><span class="logo"></span> KPLab · PHP Mini</h1>
+    <div class="navsec">
+      <h3>Навигация</h3>
+      <ul class="toc">
+        <li><a href="#intro" class="active">О курсе</a></li>
+        <li><a href="#lesson0">Урок 0 · Подготовка окружения</a></li>
+        <li><a href="#lesson1">Урок 1 · Введение</a></li>
+        <li><a href="#lesson2">Урок 2 · Переменные и типы</a></li>
+        <li><a href="#lesson3">Урок 3 · Арифметика</a></li>
+        <li><a href="#lesson4">Урок 4 · Условия</a></li>
+        <li><a href="#lesson5">Урок 5 · Массивы</a></li>
+        <li><a href="#lesson6">Урок 6 · Циклы</a></li>
+        <li><a href="#lesson7">Урок 7 · Функции</a></li>
+        <li><a href="#lesson8">Урок 8 · Строки</a></li>
+        <li><a href="#lesson9">Урок 9 · Формы и GET/POST</a></li>
+        <li><a href="#lesson10">Урок 10 · Итоговый мини‑проект</a></li>
+      </ul>
+    </div>
+    <div class="navsec">
+      <h3>Материалы</h3>
+      <ul class="toc">
+        <li><a href="lesson0_php_setup.md">Урок 0 (Markdown)</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div>
+    <header>
+      <div>
+        <div class="chip">Авторская методика · практика + php.net</div>
+        <h2 style="margin:8px 0 6px">Mini‑курс PHP для начинающих</h2>
+        <div class="badges">
+          <span class="chip">Сессии по 30–60 мин</span>
+          <span class="chip">Каждый урок: теория → примеры → задачи → ссылка на php.net</span>
+          <span class="chip">Фокус на практике</span>
+        </div>
+      </div>
+      <div class="cta">
+        <a class="chip" href="#lesson0">Начать с Урока 0</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="intro">
+        <p>Этот курс создан для ученика без базовой подготовки. Мы приучаем работать с документацией на <a href="https://www.php.net/manual/ru/" target="_blank" rel="noopener">php.net</a> с первого дня и двигаемся от простого к необходимому для реальной разработки.</p>
+        <div class="note">
+          Формат каждого занятия: мини‑теория, живые примеры, 2–3 задачи и ссылка на первоисточник. Домашка — маленький практический блок, который можно проверить прямо в браузере или консоли.
+        </div>
+      </section>
+
+      <div class="hr"></div>
+
+      <section id="lesson0">
+        <h2>Урок 0. Подготовка окружения</h2>
+        <p><strong>Цель:</strong> установить и запустить PHP, настроить рабочую папку и запустить первый скрипт через браузер и консоль.</p>
+
+        <h3>Что такое PHP</h3>
+        <p>PHP — это интерпретируемый язык, исполняется на стороне сервера. Страница <code>index.php</code> сначала выполняется PHP‑интерпретатором, а затем её результат отдается браузеру.</p>
+
+        <h3>Установка PHP</h3>
+        <div class="grid">
+          <div>
+            <h4>Windows</h4>
+            <ol class="list">
+              <li>Зайдите на <a href="https://windows.php.net/download" target="_blank" rel="noopener">windows.php.net/download</a></li>
+              <li>Скачайте <em>Thread Safe</em> ZIP последней стабильной версии</li>
+              <li>Распакуйте в <code>C:\php</code> и добавьте этот путь в переменную <code>PATH</code></li>
+              <li>Проверьте в терминале: <code>php -v</code></li>
+            </ol>
+            <p class="note">Альтернатива: <a href="https://www.apachefriends.org/ru/index.html" target="_blank" rel="noopener">XAMPP</a> (Apache+PHP+MySQL).</p>
+          </div>
+          <div>
+            <h4>macOS</h4>
+            <ol class="list">
+              <li>Установите Homebrew</li>
+            </ol>
+            <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install php
+php -v</code></pre>
+            <h4>Linux (Ubuntu/Debian)</h4>
+            <pre><code>sudo apt update
+sudo apt install php
+php -v</code></pre>
+          </div>
+        </div>
+
+        <h3>Рабочая папка и первый файл</h3>
+        <pre><code>C:\php-projects
+└─ lesson0
+</code></pre>
+        <p>Создайте <code>index.php</code> со строками:</p>
+        <pre><code>&lt;?php
+echo "Привет, мир!";
+</code></pre>
+
+        <h3>Запуск</h3>
+        <ol class="list">
+          <li>Встроенный сервер: <code>php -S localhost:8000</code> → откройте <a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a></li>
+          <li>Консольный запуск: <code>php index.php</code></li>
+        </ol>
+
+        <h3>Домашка</h3>
+        <ul class="list">
+          <li>Поставить PHP и запустить встроенный сервер</li>
+          <li>Создать <code>hello.php</code>, вывести имя и город</li>
+          <li>Запустить файл и в браузере, и через консоль</li>
+        </ul>
+
+        <p>Также доступна версия урока в <a href="lesson0_php_setup.md">Markdown</a>.</p>
+      </section>
+
+      <div class="hr"></div>
+
+      <section id="lesson1">
+        <h2>Урок 1. Первое знакомство с PHP</h2>
+        <p><strong>Тезисы:</strong> теги <code>&lt;?php ?&gt;</code>, вывод <code>echo/print/var_dump</code>, базовые ошибки, цикл «правка‑перезапуск‑проверка».</p>
+        <h3>Мини‑задачи</h3>
+        <ol class="list">
+          <li>Выведите имя и возраст одной строкой.</li>
+          <li>Сложите два числа и выведите результат.</li>
+        </ol>
+        <p>Документация: <a href="https://www.php.net/manual/ru/function.echo.php" target="_blank" rel="noopener">echo</a>, <a href="https://www.php.net/manual/ru/function.var-dump.php" target="_blank" rel="noopener">var_dump</a>.</p>
+      </section>
+
+      <section id="lesson2">
+        <h2>Урок 2. Переменные и типы</h2>
+        <p>Переменные, примитивные типы (int, float, string, bool), массивы, конкатенация, <code>gettype()</code>.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/language.types.php" target="_blank" rel="noopener">Типы</a>.</p>
+      </section>
+
+      <section id="lesson3">
+        <h2>Урок 3. Арифметика</h2>
+        <p>Операторы <code>+ - * / % **</code>, приоритет, сокращенные формы <code>+=</code>, <code>-=</code>.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/language.operators.arithmetic.php" target="_blank" rel="noopener">Арифметические операторы</a>.</p>
+      </section>
+
+      <section id="lesson4">
+        <h2>Урок 4. Условия</h2>
+        <p><code>if/elseif/else</code>, логические операторы <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, сравнение <code>==</code> vs <code>===</code>.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/control-structures.if.php" target="_blank" rel="noopener">if</a>.</p>
+      </section>
+
+      <section id="lesson5">
+        <h2>Урок 5. Массивы</h2>
+        <p>Нумерованные и ассоциативные массивы, <code>count()</code>, вывод <code>print_r()</code>.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/language.types.array.php" target="_blank" rel="noopener">Массивы</a>.</p>
+      </section>
+
+      <section id="lesson6">
+        <h2>Урок 6. Циклы</h2>
+        <p><code>for</code>, <code>while</code>, <code>foreach</code>, перебор массивов.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/control-structures.foreach.php" target="_blank" rel="noopener">foreach</a>.</p>
+      </section>
+
+      <section id="lesson7">
+        <h2>Урок 7. Функции</h2>
+        <p>Объявление функций, параметры, возвращаемые значения, область видимости.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/functions.user-defined.php" target="_blank" rel="noopener">Пользовательские функции</a>.</p>
+      </section>
+
+      <section id="lesson8">
+        <h2>Урок 8. Строки</h2>
+        <p><code>strlen()</code>, <code>strpos()</code>, <code>str_replace()</code> и базовые операции со строками.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/ref.strings.php" target="_blank" rel="noopener">Строковые функции</a>.</p>
+      </section>
+
+      <section id="lesson9">
+        <h2>Урок 9. Формы и GET/POST</h2>
+        <p>Передача данных из HTML‑форм, массивы <code>$_GET</code>, <code>$_POST</code>, базовая защита <code>htmlspecialchars()</code>.</p>
+        <p>Документация: <a href="https://www.php.net/manual/ru/function.htmlspecialchars.php" target="_blank" rel="noopener">htmlspecialchars</a>.</p>
+      </section>
+
+      <section id="lesson10">
+        <h2>Урок 10. Итоговый мини‑проект</h2>
+        <p>Форма входа: логин и пароль → проверка → сообщение об успехе/ошибке. Повторение пройденного, чистый код и мелкие проверки.</p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+  // Подсветка активного пункта в сайдбаре по скроллу
+  const links = document.querySelectorAll('nav .toc a[href^="#"]');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  const onScroll = () => {
+    const pos = window.scrollY + 100;
+    let current = sections[0].id;
+    sections.forEach(sec => { if (sec.offsetTop <= pos) current = sec.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
 </html>
